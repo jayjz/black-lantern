@@ -23,6 +23,12 @@ The subsequent Experiment 01 task authorizes implementing, executing and publish
 
 Challenge Experiment 01's interface-coverage assumption using one temporary read-only entry point; preserve the original implementation and evidence. Compare the unchanged suite with a minimal new regression, repair the new entry point, and publish the bounded finding through the requested GitHub workflow. [Review](experiments/complete-mediation/README.md).
 
+## Experiment 03: real-model requests
+
+Evaluate the existing local Ollama model as a bounded proposer of synthetic tool calls. Relate paired document inputs to actual proposals, deterministic authorization and observed effects; replay genuine recorded relay proposals against correct and deliberately defective copies. The task authorizes loopback inference and GitHub delivery, without a general agent runtime. [Experiment](experiments/model-tool-authorization/README.md).
+
+The subsequent verification-hardening task authorizes review and repair of Experiment 03's offline evaluation machinery and GitHub delivery through existing PR #5. Preserve all original live evidence and the inconclusive frozen comparison; no additional inference. [Acceptance gate](PLANS.md#experiment-03-verification-hardening-gate).
+
 ## Next phase: agentic AI security evaluation and commercial discovery (2026-10-24)
 
 Prospective mission: develop reproducible, effect-based security tests for tool-using AI agents, and determine whether a narrowly defined customer pays for credible staging-workflow authorization assessments. Four prioritized goals: independently reproduce Experiment 03; compare a provenance-checked Dolphin candidate with the existing model under frozen synthetic controls; obtain qualified external engineering criticism; interview actual owners of agent-authorization problems and test a consent-based pilot hypothesis. [Gated roadmap](roadmap/next-phase-agent-security.md).
