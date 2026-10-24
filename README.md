@@ -18,6 +18,8 @@ The [source index](research/sources/index.md) preserves URLs, dates, verificatio
 
 ## Repository map
 
+The [agent intrusion containment design](experiments/agent-intrusion-containment/README.md) compares a passive defensive message with independent authorization and containment. It is design only; proposed regressions have not run.
+
 | Location | Canonical purpose |
 | --- | --- |
 | [AGENTS.md](AGENTS.md) | Research and execution rules |
