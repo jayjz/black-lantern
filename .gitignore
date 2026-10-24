@@ -1,0 +1,32 @@
+# Credentials and private local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+.aws/
+.ssh/
+
+# Unreviewed captures and private laboratory output
+evidence/raw/
+evidence/private/
+evidence/runs/
+*.pcap
+*.pcapng
+*.dmp
+*.log
+
+# Local environments and generated caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+.DS_Store
+Thumbs.db
