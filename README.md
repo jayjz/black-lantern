@@ -84,3 +84,9 @@ Every published experiment should identify:
 - [Working rules](AGENTS.md)
 
 **Direction:** Develop small, inspectable security research tools and tests for agentic systems, with enforcement outside the model and evidence strong enough to falsify our own assumptions.
+
+## Next phase: from research to reproducible agent-security evaluation
+
+[Next-phase roadmap](roadmap/next-phase-agent-security.md) sets four sequential gates: reproduce Experiment 03 from a clean checkout; establish Dolphin GGUF provenance and preregister a controlled model comparison; obtain human security-engineer criticism; and validate a specific customer authorization-testing job through consent-based discovery. This is a research and market-learning plan, **not** a completed commercial service or authorization to test third-party systems.
+
+Experiment 03 is currently proposed in [PR #5](https://github.com/jayjz/black-lantern/pull/5). The current `main` status table above is historical as of this branch; do not imply that an open PR is merged. Future Dolphin tests have **not** been run.
