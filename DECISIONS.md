@@ -1,5 +1,9 @@
 # Decision record
 
+## Experiment 03 - D10: Recompute the verification gate without rewriting observations
+
+An evidence flag cannot select which episodes are checked. Require every frozen episode and a consistent recomputed oracle, then derive completeness, security pass and task completion from reconciled records and transcript termination. Equality with a stored failing oracle is insufficient. Malformed evidence fails closed. Keep the strict historical pairing implementation and evidence intact. Define `pre-exposure-v2-id-insensitive` separately for future use: erase only assistant tool-call envelope IDs in pre-exposure messages, preserve all arguments/index/order/content/settings and require actual reconciled document exposure. Do not apply the new rule to relabel the historical run. This improves internal evidence consistency, not authenticity against a party able to forge an entire coherent trace.
+
 ## Experiment 03 - D09: Treat inference as untrusted proposal generation
 
 Use Python standard-library HTTP to the explicitly authorized loopback Ollama endpoint. Preserve both earlier experiment subtrees. Import the reviewed authorization model; add exact synthetic tool validation, not model-executed tools or policy decisions. Replace the model's stored personality system message with a fixed experimental system message and explicitly override its stored 2048-context/100-token/0.4-temperature defaults for this run; retain both configurations as evidence. Record the model manifest digest before and after inference, plus sanitized Modelfile/template and placement. A model tag is mutable; digest observations are not attestation of server integrity. Local inference extends the trusted computing base to the HTTP adapter and Ollama response parser. Same-process observation and this agent's execution are not independent engineering certification.

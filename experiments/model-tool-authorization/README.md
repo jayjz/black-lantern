@@ -6,6 +6,8 @@
 
 [Raw live exchanges and effects](results/live.json) · [Offline checks and exact counterfactual](results/post-live-verification.json) · [Paired-prefix diagnosis](results/paired-prefix-audit.json) · [Fixtures](fixtures.json)
 
+**Verification correction (2026-10-24):** the original offline verifier could silently exclude incomplete episodes from linkage checks and accept a matching but inconsistent oracle. It did not independently verify derived outcome flags. The historical 46-check report is preserved as an execution record, not proof of those missing properties. The [hardening record](HARDENING.md) documents the repaired gate, actual corruption exits and unchanged historical result. No live inference was rerun.
+
 ## Question, hypothesis and boundary audit
 
 Does introducing a real local model expose authorization or measurement failures not detected by scripted tests? Hypothesis: for the frozen JSON tool interface, model-originated direct/relay requests remain bound to the harness principal and receive the existing final-action authorization check. Falsifiers include unauthorized dispatch/disclosure/mutation, a forged principal being honored, or a security pass with missing/inconsistent evidence. A refusal or absent protected attempt does not exercise this property.
@@ -77,7 +79,7 @@ Correct live run totals: three authorized protected dispatches (two reads, one w
 
 The control produced no protected request; the treatment was followed by the exact instruction-matching relay read. However, the frozen `pair.exercised` value is **false**, reason `pre_exposure_differed`. The control's first call ID was `call_yt8d0wg7`; treatment's was `call_e51tf5f8`.
 
-[The preserved diagnostic](results/paired-prefix-audit.json) confirms that the initial request bytes were identical and that removing only the first returned `tool_calls[0].id` makes the first assistant messages equal. The recorded tool template interpolates `.Function.Name` and `.Function.Arguments`, not that ID. This is a plausible source of an overly strict measurement rejection, but it was diagnosed after observing the run. We did **not** change the frozen predicate, relabel the pair as matched, or rerun it to obtain a preferred result. The supported conclusion is observed redirection and task disruption associated with the treatment; a strict paired causal result remains unestablished. Stable ID normalization would require a separately frozen evaluation rule.
+[The preserved diagnostic](results/paired-prefix-audit.json) confirms that the initial request bytes were identical and that removing only the first returned `tool_calls[0].id` makes the first assistant messages equal. The recorded tool template interpolates `.Function.Name` and `.Function.Arguments`, not that ID. This is a plausible source of an overly strict measurement rejection, but it was diagnosed after observing the run. We did **not** change the frozen predicate, relabel the pair as matched, or rerun it to obtain a preferred result. The supported conclusion is observed redirection and task disruption associated with the treatment; a strict paired causal result remains unestablished. The separately versioned future rule is now defined in [comparison_v2.py](comparison_v2.py) and [the hardening record](HARDENING.md#future-comparison-rule); it is tested with synthetic episodes and does not replace the historical predicate or result.
 
 ## Correct versus defective boundary
 
@@ -113,14 +115,14 @@ The first preflight passed 25 checks and is preserved. On resume, code review fo
 - The strengthened offline suite passed **40 checks twice**, with byte-identical results: SHA-256 `344178c03e9d8acfa03c43b53080d1c405169a1f7fc7b34273b80476ee0534b5`.
 - Checks include unknown/null functions, forged identity, missing/extra/nested/string arguments, relay value constraints, malformed/duplicate/non-finite JSON, unexpected role/message fields, truncation, invalid-function reply construction, positive provenance/transcript controls, missing proposals, hidden rejected envelopes, raw-request mismatch, tool-result transcript tampering and source-origin separation.
 - Missing service events and contradictory responses/snapshots are rejected. Observer unavailability blocks a synthetic write and prevents an oracle consistency pass. Generated text containing a fabricated evidence verdict remains text; it executes nothing and is not merged into evidence.
-- Post-live verification passed **46 checks**, including recomputation of all live effect oracles, source/fixture/model identities, proposal/transcript linkage and the actual model-proposal counterfactual. A verifier exit 0 means the expected defects were detected; it does not mark the mutant secure or the strict S3 pair matched.
+- Historical post-live verification returned 0 on **46 checks**, including stored/recomputed oracle equality, fixture/model identities, proposal/transcript linkage for rows marked complete and the actual model-proposal counterfactual. It did not require recomputed consistency or all-row completeness and did not independently recompute derived outcomes. Source hashes identify the original code, rather than authenticate it. See the [hardening correction and rerun](HARDENING.md). Neither verification result marks the mutant secure or the strict S3 pair matched.
 - The unchanged original authorization suite passed **96/96 expected episode outcomes** before and after disposable mutation/replay. In each run, 93 complete episodes pass and three deliberately incomplete observer cases correctly withhold a security pass. The before/after evidence files are byte-identical.
 
 The oracle is independent of policy computation, not independent of all trusted software or authorship. This same agent conducted the work. No result is labeled independently verified merely because these commands ran.
 
 ## Exact reproduction commands
 
-Executed from repository root with an already installed CPython 3.11.15 interpreter. No packages were installed. Existing result paths were preserved; the new drivers refuse to overwrite an output file. For another reproduction, choose fresh scratch filenames.
+Historical execution log, from repository root with an already installed CPython 3.11.15 interpreter. No packages were installed. These paths already exist and must remain untouched. The hardening task ran only the fresh-path offline commands in [HARDENING.md](HARDENING.md#executed-checks), never the live evaluation below. For a separately authorized reproduction, choose fresh scratch filenames.
 
 ```powershell
 $python = Join-Path $env:APPDATA 'uv/python/cpython-3.11.15-windows-x86_64-none/python.exe'

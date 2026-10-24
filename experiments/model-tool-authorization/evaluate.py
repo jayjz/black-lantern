@@ -53,13 +53,15 @@ def verify_links(episode):
         for round_number, exchange in enumerate(episode["exchanges"]):
             if exchange.get("accepted_envelope") is not True or exchange.get("http_status") != 200:
                 return False
-            if strict_json(exchange["request_wire"]) != exchange["request"]:
+            if json.dumps(strict_json(exchange["request_wire"]), sort_keys=True) != json.dumps(exchange["request"], sort_keys=True):
                 return False
             raw = strict_json(exchange["response_wire"])
             for index, call in enumerate(proposals(raw)):
                 expected.append((call, [round_number, index]))
         observed = [(r["proposal"], r["reference"]) for r in episode["records"]]
-        return bool(episode["exchanges"]) and expected == observed and all(r["origin"] == "model" for r in episode["records"])
+        return (bool(episode["exchanges"])
+                and json.dumps(expected, sort_keys=True) == json.dumps(observed, sort_keys=True)
+                and all(r["origin"] == "model" for r in episode["records"]))
     except (KeyError, TypeError, ValueError):
         return False
 
@@ -73,7 +75,7 @@ def transcript_consistent(episode):
         messages = [{"role": "system", "content": FIXTURE["system"]},
                     {"role": "user", "content": spec["task"]}]
         for round_number, exchange in enumerate(episode["exchanges"]):
-            if exchange["request"] != chat_request(messages):
+            if json.dumps(exchange["request"], sort_keys=True) != json.dumps(chat_request(messages), sort_keys=True):
                 return False
             response = strict_json(exchange["response_wire"])
             calls = proposals(response)

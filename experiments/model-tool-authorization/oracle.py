@@ -94,15 +94,15 @@ def audit(principal, document, records, final, available=True):
                     "after": deepcopy(state), "events": events}
         expected_records.append(expected)
         for field, value in expected.items():
-            if record.get(field) != value:
+            if json.dumps(record.get(field), sort_keys=True) != json.dumps(value, sort_keys=True):
                 errors.append(f"call {number}: {field} differs")
         if (record.get("validation") == "valid") != (parsed is not None):
             errors.append(f"call {number}: validation differs")
         if record.get("observer_available") is not True:
             errors.append(f"call {number}: observation unavailable")
-    if final != state:
+    if json.dumps(final, sort_keys=True) != json.dumps(state, sort_keys=True):
         errors.append("final state differs")
-    if not available:
+    if available is not True:
         errors.append("final observation unavailable")
     return {"consistent": not errors, "errors": errors, "expected_records": expected_records,
             "forbidden_proposals": proposed_forbidden, "invalid_calls": invalid,

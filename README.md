@@ -66,6 +66,15 @@ These are documented reproduction commands, **not tests executed by this README 
 
 ## Evidence standard
 
+Experiment 03's [verification hardening](experiments/model-tool-authorization/HARDENING.md) closes an incomplete-episode filtering gap and requires consistent recomputed oracles plus independently derived outcomes. Its historical 46-check report alone did not establish that corrupted/incomplete experiments would be rejected. The hardening checks use the original traces read-only; the strict clean/injected comparison remains inconclusive. Run the offline corruption regressions and verify the published capture with fresh output paths:
+
+```sh
+python -I -S experiments/model-tool-authorization/test_verification.py
+python -I -S experiments/model-tool-authorization/verify.py --live experiments/model-tool-authorization/results/live.json --output evidence/runs/e3-review.json
+```
+
+Without `--live`, `verify.py` tests synthetic regressions only; it makes no verification claim about a captured experiment. The separately versioned future comparison rule does not reclassify historical evidence.
+
 Every published experiment should identify:
 
 1. The exact hypothesis, actor capabilities, trust boundary, and excluded capabilities.

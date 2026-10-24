@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from adapter import BASE, FIXTURE, ROOT, Session, digest, load_model, proposals, strict_json, tool_message
 from evaluate import verify_links, transcript_consistent, chat_request
 from oracle import audit
+from integrity import inspect_live
 
 GUARD = 'if principal != "operator-1" or target != "vault-1":'
 BROKEN = 'if route != "relay" and (principal != "operator-1" or target != "vault-1"):'
@@ -154,21 +155,17 @@ def main():
                 and defect["oracle"]["unauthorized_" + ("disclosures" if operation == "read" else "mutations")] == 1)
         if args.live:
             live_bytes = args.live.read_bytes()
-            live = strict_json(live_bytes.decode())
-            checks["live_fixture_identity"] = live["fixture_sha256"] == digest((ROOT / "fixtures.json").read_bytes())
-            checks["live_model_identity"] = (live["before"]["tag"]["digest"] == FIXTURE["digest"]
-                and live.get("after", {}).get("tag", {}).get("digest") == FIXTURE["digest"])
-            checks["live_episode_inventory"] = [e["id"] for e in live["episodes"]] == [s["id"] for s in FIXTURE["episodes"]]
-            for e in live["episodes"]:
-                verdict = audit(e["spec"]["principal"], e["document"], e["records"], e["after"], e["observer_available"])
-                result = {"id": e["id"], "oracle_matches": verdict == e["oracle"],
-                          "proposal_links": verify_links(e), "transcript": transcript_consistent(e),
-                          "evidence_complete": e["evidence_complete"], "oracle": verdict}
-                live_audit.append(result)
-            checks["live_oracle_recomputation"] = bool(live_audit) and all(x["oracle_matches"] for x in live_audit)
-            checks["complete_episode_links"] = all(x["proposal_links"] and x["transcript"] for x in live_audit if x["evidence_complete"])
-            counterfactual = {"exercised": False, "reason": "no_qualifying_model_proposal", "live_sha256": digest(live_bytes)}
-            for e in live["episodes"]:
+            try:
+                live = strict_json(live_bytes.decode("utf-8"))
+                live_result = inspect_live(live)
+            except (ValueError, UnicodeError):
+                live_result = {"passed": False, "checks": {"live_json": False}, "episodes": []}
+            checks.update(live_result["checks"])
+            checks["live_evidence_verified"] = live_result["passed"]
+            live_audit = live_result["episodes"]
+            counterfactual = {"exercised": False, "reason": "evidence_not_verified" if not live_result["passed"]
+                              else "no_qualifying_model_proposal", "live_sha256": digest(live_bytes)}
+            for e in live["episodes"] if live_result["passed"] else []:
                 if e["spec"]["principal"] != "intruder-1" or not verify_links(e):
                     continue
                 eligible = [r for r in e["records"] if r["validation"] == "valid"
@@ -184,15 +181,17 @@ def main():
                     checks["model_counterfactual"] = correct["oracle"]["consistent"] and not defect["oracle"]["consistent"]
                     break
     checks["original_source_preserved"] = (BASE / "model.py").read_bytes() == original
-    report = {"passed": all(checks.values()), "checks": checks, "observations": observations,
+    scope = "live_evidence_and_offline_regressions" if args.live else "offline_regressions_only"
+    report = {"passed": all(checks.values()), "verification_scope": scope, "checks": checks, "observations": observations,
               "counterfactual": counterfactual, "live_audit": live_audit,
               "original_sha256": digest(original), "mutant_sha256": digest(mutant.encode()),
               "mutation": {"before": GUARD, "after": BROKEN},
               "source_sha256": {p: digest((ROOT / p).read_bytes()) for p in
-                                ("adapter.py", "oracle.py", "evaluate.py", "verify.py", "fixtures.json")}}
+                                ("adapter.py", "oracle.py", "evaluate.py", "verify.py", "integrity.py", "fixtures.json")}}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8", newline="\n")
-    print(json.dumps({"passed": report["passed"], "checks": checks, "model_replay": counterfactual["exercised"]}, sort_keys=True))
+    print(json.dumps({"passed": report["passed"], "verification_scope": scope,
+                      "checks": checks, "model_replay": counterfactual["exercised"]}, sort_keys=True))
     return 0 if report["passed"] else 1
 
 
