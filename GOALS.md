@@ -22,3 +22,9 @@ The subsequent Experiment 01 task authorizes implementing, executing and publish
 ## Adversarial Review 02: complete mediation
 
 Challenge Experiment 01's interface-coverage assumption using one temporary read-only entry point; preserve the original implementation and evidence. Compare the unchanged suite with a minimal new regression, repair the new entry point, and publish the bounded finding through the requested GitHub workflow. [Review](experiments/complete-mediation/README.md).
+
+## Next phase: agentic AI security evaluation and commercial discovery (2026-10-24)
+
+Prospective mission: develop reproducible, effect-based security tests for tool-using AI agents, and determine whether a narrowly defined customer pays for credible staging-workflow authorization assessments. Four prioritized goals: independently reproduce Experiment 03; compare a provenance-checked Dolphin candidate with the existing model under frozen synthetic controls; obtain qualified external engineering criticism; interview actual owners of agent-authorization problems and test a consent-based pilot hypothesis. [Gated roadmap](roadmap/next-phase-agent-security.md).
+
+**Scope update:** The initial Research 01 exclusion of startup validation was specific to that earlier commissioned work and remains part of its historical record. This subsequent phase now authorizes *planning and consent-based customer discovery*, not product implementation, claims of certified expertise, or real-world testing. All existing prohibitions on unauthorized access, uncontrolled execution and publishing secrets remain in force.
