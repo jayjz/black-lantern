@@ -84,3 +84,7 @@ Every published experiment should identify:
 - [Working rules](AGENTS.md)
 
 **Direction:** Develop small, inspectable security research tools and tests for agentic systems, with enforcement outside the model and evidence strong enough to falsify our own assumptions.
+
+## Next phase: independent validation and Dolphin comparison
+
+[Phase 04 roadmap](roadmap/PHASE-04.md) sets four evidence-gated milestones: independently reproduce Experiment 03, verify the provenance and behavior of a local Dolphin 3.0 abliterated GGUF under the same synthetic authorization controls, obtain external security-engineer criticism, and validate the customer job through discovery interviews. **This phase is planned, not executed; the Dolphin model is not a trusted security judge.** Experiment 03 implementation and hardening remain in [PR #5](https://github.com/jayjz/black-lantern/pull/5) until merged. The roadmap is prospective and does not revise prior experiment findings.

@@ -22,3 +22,7 @@ The subsequent Experiment 01 task authorizes implementing, executing and publish
 ## Adversarial Review 02: complete mediation
 
 Challenge Experiment 01's interface-coverage assumption using one temporary read-only entry point; preserve the original implementation and evidence. Compare the unchanged suite with a minimal new regression, repair the new entry point, and publish the bounded finding through the requested GitHub workflow. [Review](experiments/complete-mediation/README.md).
+
+## Prospective Phase 04: agent-security research to customer validation (2026-10-24)
+
+Future work will prioritize independently reproducible evaluations of tool-using AI-agent authorization, prompt-injection-induced task disruption, and the integrity of test evidence. Compare the local Dolphin 3.0 abliterated model with a fixed Qwen baseline **as untrusted proposal generators**, keeping permission decisions outside the models. Seek external security-engineer scrutiny, strengthen operator competence, and investigate a narrowly scoped staging-agent authorization assessment as a *business hypothesis*, not an existing product. This prospective authorization to conduct interviews supersedes the old startup-validation exclusion for planning and voluntary customer discovery only; it does **not** authorize live exploitation, scanning, external testing, secret access, or deployment. [Phase 04 gates](roadmap/PHASE-04.md).
