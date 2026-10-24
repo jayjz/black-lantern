@@ -1,5 +1,9 @@
 # Decision record
 
+## Review 02 - D08: Treat route coverage separately from oracle independence
+
+Preserve Experiment 01 byte-for-byte. A test-only source builder adds exactly one `inspect` read entry point to disposable copies. Correct default routes it through `Resource.perform`; an explicit mutation replaces that delegation with an unchecked `snapshot()` return. Both variants have the same interface. This tests a new ingress, rather than weakening the already-tested final guard. The original oracle and runner remain unchanged: new static cases test whether their response/state comparisons detect a read absent from their service event stream. A green old matrix cannot establish that all accepted routes were exercised. Same-process instrumentation and this same agent's second pass do not constitute independent human review or Python isolation. [Code audit and limits](experiments/complete-mediation/README.md).
+
 ## 2026-10-23 - D07: Narrow execution to a modeled authorization boundary
 
 The subsequent user task explicitly requests the smallest offline implementation and execution, superseding earlier design-only authorization for this slice. Preserve all previous proposals. Use one in-process Python model rather than implement the VM-dependent A/B/C containment experiment. This is a material departure from its environment prerequisite, not satisfaction of that prerequisite. No VM isolation result is claimed. No host configuration changes or dependencies are necessary. The current scope excludes message efficacy, revocation, approvals, repair, multiple runs/resources and actual tool integrations.

@@ -1,5 +1,13 @@
 # Research 01 plan
 
+## Adversarial Review 02 acceptance gate
+
+Hypothesis: every protected operation reachable through a bound data-only interface receives final-action authorization. Counterexample: an intruder submits a valid read request through a new `inspect` route and receives the exact protected marker without `Resource.perform` authorizing it. Direct Python access to `snapshot()` alone is outside this claim. Only the authorized disposable variant adds this route; do not claim it already existed in Experiment 01.
+
+Scope before execution: original two identities and vault; one alternative read-only entry point in temporary model copies. No original experiment edits, new dependencies, actor Python execution, shell/network access, real targets or host changes. Harness may copy source, run isolated Python children and write synthetic evidence. Stop an episode at its first evidence discrepancy; reset subsequent diagnostics; unexpected real actor I/O or non-synthetic content stops all runs.
+
+Freeze the [three new cases](experiments/complete-mediation/cases.json): unauthorized inspect read expects denial/no events/unchanged state; authorized inspect read expects exact value plus one service event; observer loss/recovery expects frozen dispatch and no security pass. Run the original suite against original and defective copies; run original plus new cases against defect, correction, repair removal and restoration. Require exact counterexample response, no logged dispatch and unchanged snapshot; new regression must fail the defect, corrected authorized work must pass, and missing evidence must be rejected. Three deterministic repetitions per case. GitHub delivery requires inspected branches/PRs, verified remote SHA and a PR to main; merge only if every user-specified safety condition is established.
+
 ## Experiment 01 execution gate (subsequent task)
 
 This task replaces the earlier VM/A/B/C execution prerequisites only for the narrower in-process authorization model. The previous design remains historical and unexecuted. Host execution is not evidence of disconnected VM isolation. Scope: two synthetic harness-bound identities, one in-memory resource, direct and single-relay read/write, deterministic final authorization, independent service observer and hand-authored oracle. No actor code execution, host tools, networking, installations, containment or remediation.
