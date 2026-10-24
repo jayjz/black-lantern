@@ -21,3 +21,9 @@ Local source and negative tests show a relevant authority-separation pattern. Th
 ## 2026-10-23 — D05: Test transitive authority first
 
 Design a synthetic package-relay authorization experiment derived from the documented containment incident. This targets the largest undemonstrated capability: proving that restrictions survive indirect access through permitted tools. Use deterministic requests and an independent oracle, without a live model or network. The result can establish only the modeled policy property, not real sandbox security. [Proposal](experiments/01-transitive-tool-authorization.md).
+
+## 2026-10-23 - D06: Reject message-only containment as a security boundary
+
+Design decision, not an empirical result: retain the exact passive message only as an optional deception/behavioral stimulus. Its measurable benefit is unknown until executed observations exist. An actor allowed to ignore text is a counterexample to any universal guarantee based on that text alone. A scripted follower illustrates conditional cooperation, not reliable persuasion. Reject autonomous host remediation by the unauthorized actor.
+
+Compare message-only behavior with service-side authorization and an independent controller that records, revokes and proposes a bounded mock fix for human approval. The controller does not infer approval from document text, actor requests or model claims. Security must be enforced through trusted identity binding, final-action authorization, atomic revocation, constrained tools, isolation and independent evidence. The message must be removable without weakening enforcement. [Hypotheses and decision rule](experiments/agent-intrusion-containment/hypotheses.md), [architecture](experiments/agent-intrusion-containment/architecture.md).
