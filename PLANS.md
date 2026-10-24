@@ -1,5 +1,13 @@
 # Research 01 plan
 
+## Experiment 01 execution gate (subsequent task)
+
+This task replaces the earlier VM/A/B/C execution prerequisites only for the narrower in-process authorization model. The previous design remains historical and unexecuted. Host execution is not evidence of disconnected VM isolation. Scope: two synthetic harness-bound identities, one in-memory resource, direct and single-relay read/write, deterministic final authorization, independent service observer and hand-authored oracle. No actor code execution, host tools, networking, installations, containment or remediation.
+
+Freeze I1 complete final mediation, I2 harness identity integrity, I3 no unauthorized dispatch/disclosure/mutation, I4 exact authorized effects and I5 no pass with absent/inconsistent evidence before execution. The [matrix](experiments/authorization-boundary/cases.json) specifies expected responses, service dispatches and exact final bytes/version without invoking policy code.
+
+Acceptance: correct suite passes; disposable relay-check removal produces independently observed forbidden effects and a nonzero test exit; restored source passes. Three fresh-state repetitions must agree. Observer unavailable blocks dispatch; missing, contradictory or forged evidence must fail the oracle. Stop a scenario at its first discrepancy, preserve its synthetic record, and fail the run; only separately reset scenarios continue for diagnosis. Stop all execution for real I/O by the actor, non-synthetic data or scope expansion. Trusted harness may read source/fixtures and write evidence; its temporary mutation driver may launch only this test runner. [Report and limitations](experiments/authorization-boundary/REPORT.md).
+
 **Window:** disclosures dated 2026-07-01 through 2026-10-23 inclusive. Earlier events may qualify when first disclosed within the window. Later revisions are excluded from cutoff conclusions unless an in-window source independently supports the claim.
 
 | Phase | Acceptance criterion | Status |
