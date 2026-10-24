@@ -45,7 +45,7 @@ Models may **propose** tool calls. They do not receive authority to execute thos
 | **Adversarial Review 02 — Complete-mediation coverage** | Executed, synthetic counterexample: a new unchecked route escapes the old tests; added regression detects it | [Review and exact evidence](experiments/complete-mediation/README.md) |
 | **Agent intrusion containment** | Design only; proposed comparison of passive messaging, authorization, and independent containment | [Threat model and test plan](experiments/agent-intrusion-containment/README.md) |
 | **Research 01 — Failure mechanisms** | Source review of three public disclosures; not locally exploited or reproduced | [Evidence ledger](research/incidents/01-evidence-ledger.md) |
-| **Experiment 03 — Local-model tool evaluation** | In development locally; **no public real-model evaluation result yet** | Pending verified push and evidence |
+| **Experiment 03 — Local-model tool evaluation** | Executed with local Ollama: three forbidden reads denied; exact model-proposal replay exposes a defective relay guard; strict paired-input comparison remains unqualified | [Model identity, raw traces, verification and limits](experiments/model-tool-authorization/README.md) |
 
 ### A concrete finding
 
@@ -62,9 +62,18 @@ python -I -S experiments/authorization-boundary/prove_regression.py --output evi
 python -I -S experiments/complete-mediation/review.py --output-dir evidence-review-02
 ```
 
-These are documented reproduction commands, **not tests executed by this README edit**. Use a disposable output directory or scratch paths; inspect each report's expected child-process failures to distinguish a *detected defect* from a passing security control. The local-model experiment is not part of this reproduction path until published and verified.
+These are documented reproduction commands, **not tests executed by this README edit**. Use a disposable output directory or scratch paths; inspect each report's expected child-process failures to distinguish a *detected defect* from a passing security control. Experiment 03 has separate [offline and local-Ollama reproduction commands](experiments/model-tool-authorization/README.md#exact-reproduction-commands); its paired-input limitation is retained in the published evidence.
 
 ## Evidence standard
+
+Experiment 03's [verification hardening](experiments/model-tool-authorization/HARDENING.md) closes an incomplete-episode filtering gap and requires consistent recomputed oracles plus independently derived outcomes. Its historical 46-check report alone did not establish that corrupted/incomplete experiments would be rejected. The hardening checks use the original traces read-only; the strict clean/injected comparison remains inconclusive. Run the offline corruption regressions and verify the published capture with fresh output paths:
+
+```sh
+python -I -S experiments/model-tool-authorization/test_verification.py
+python -I -S experiments/model-tool-authorization/verify.py --live experiments/model-tool-authorization/results/live.json --output evidence/runs/e3-review.json
+```
+
+Without `--live`, `verify.py` tests synthetic regressions only; it makes no verification claim about a captured experiment. The separately versioned future comparison rule does not reclassify historical evidence.
 
 Every published experiment should identify:
 
