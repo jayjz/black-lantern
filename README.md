@@ -1,36 +1,86 @@
 # Black Lantern
 
-A canonical cybersecurity research laboratory for understanding how software and agent-enabled systems fail, which controls prevent those failures, and which engineering capabilities make those controls dependable.
+**Agentic AI security research, tooling, and reproducible testing.**
 
-This repository holds evidence, bounded assessments, and reproducible experiment designs. It is not a startup or product roadmap.
+Black Lantern is a public research laboratory examining how AI agents, developer tools, and the systems connecting them cross trust boundaries. The goal is to turn security claims into narrow, testable hypotheses—and publish enough code, fixtures, observed effects, and limitations for another engineer to challenge the results.
 
-## Research 01
+**Core question:** When an AI agent requests an action, what actually determines whether that action is allowed—and how do we know the control held?
 
-**Disclosure window:** July 1 through October 23, 2026, inclusive. **Status:** source review and design complete; independent engineering review pending. No exploit tests were run.
+## What we investigate
 
-Start with the [evidence ledger](research/incidents/01-evidence-ledger.md), then the [technical synthesis](research/incidents/01-synthesis.md). The three selected cases are:
+- **Agent/tool authorization:** Identity binding, delegation, transitive tool access, and authorization at the final resource effect.
+- **Prompt injection and untrusted inputs:** Whether lower-trust content changes an agent's proposed actions; whether enforcement still prevents unauthorized effects.
+- **Evaluation integrity:** Whether an oracle detects unexpected execution paths, missing observations, and intentionally broken controls.
+- **Containment and evidence:** Separating model output, attempted tool calls, authorization decisions, and resource-side effects.
+- **Failure analysis:** Learning from disclosed vulnerabilities and AI-system incidents without treating reported claims as locally reproduced results.
 
-- [PHP out-of-memory corruption](research/incidents/01-php-oom.md): a vulnerability with demonstrated exploitation in a research setting.
-- [Reasonix configuration-driven execution](research/incidents/01-reasonix.md): a disclosed vulnerability in developer tooling.
-- [OpenAI / Hugging Face evaluation containment incident](research/incidents/01-openai-hugging-face.md): a documented real intrusion, with independent investigation of part of the activity.
+## How the lab works
 
-The [source index](research/sources/index.md) preserves URLs, dates, verification status, rejected leads, and source conflicts. The [competency assessment](assessments/competency-gap.md) separates observed artifacts from untested capability. The [first experiment proposal](experiments/01-transitive-tool-authorization.md) is design only.
+```text
+Source / hypothesis
+        |
+        v
+Frozen synthetic fixtures + threat boundary
+        |
+        v
+Scripted actor or local-model tool proposal
+        |
+        v
+Schema validation -> harness-bound identity -> authorization at effect
+        |
+        v
+Protected synthetic state + observer
+        |
+        v
+Independent expectations, mutation test, reproducible evidence
+```
 
-## Repository map
+Models may **propose** tool calls. They do not receive authority to execute those calls directly. We measure *attempt*, *authorization decision*, and *actual effect* separately. A model's refusal, a green test suite, or a generated explanation is not by itself a security result.
 
-The [agent intrusion containment design](experiments/agent-intrusion-containment/README.md) compares a passive defensive message with independent authorization and containment. It is design only; proposed regressions have not run.
+## Current work
 
-| Location | Canonical purpose |
-| --- | --- |
-| [AGENTS.md](AGENTS.md) | Research and execution rules |
-| [GOALS.md](GOALS.md) | Laboratory objectives and exclusions |
-| [PLANS.md](PLANS.md) | Phases, acceptance criteria, and next work |
-| [DECISIONS.md](DECISIONS.md) | Dated decisions and their evidence |
-| `research/incidents/` | Claim ledger, focused reports, comparative analysis |
-| `research/sources/` | Source provenance and verification status |
-| `research/market/` | Reserved for evidence about security practice and tooling; no market study commissioned |
-| `assessments/` | Capability assessments with evidence limits |
-| `experiments/` | Bounded experiment proposals; later authorized results |
-| [evidence/verification.md](evidence/verification.md) | This session's executed checks and limitations |
+| Area | Published state | Start here |
+| --- | --- | --- |
+| **Experiment 01 — Authorization boundary** | Executed, synthetic Python model; direct and relay authorization with a deliberately broken guard | [Source, cases, report, and evidence](experiments/authorization-boundary/README.md) |
+| **Adversarial Review 02 — Complete-mediation coverage** | Executed, synthetic counterexample: a new unchecked route escapes the old tests; added regression detects it | [Review and exact evidence](experiments/complete-mediation/README.md) |
+| **Agent intrusion containment** | Design only; proposed comparison of passive messaging, authorization, and independent containment | [Threat model and test plan](experiments/agent-intrusion-containment/README.md) |
+| **Research 01 — Failure mechanisms** | Source review of three public disclosures; not locally exploited or reproduced | [Evidence ledger](research/incidents/01-evidence-ledger.md) |
+| **Experiment 03 — Local-model tool evaluation** | In development locally; **no public real-model evaluation result yet** | Pending verified push and evidence |
 
-Source statements are attributed reports, not locally reproduced facts. Dates on live pages do not establish immutable historical versions. See the source index before relying on an as-of-date claim.
+### A concrete finding
+
+Experiment 02 introduced a **disposable, actor-reachable** `inspect` route that returned a synthetic protected value without the final authorization check. The **unchanged** Experiment 01 suite still reported 96/96 expected episodes. With new coverage, the deliberately defective route triggered six failing episodes; after repair, all 105 expected outcomes were met, including six explicitly incomplete observer diagnostics—not security passes.
+
+This is a demonstration of an **interface-coverage blind spot in synthetic tests**, not evidence that the original implementation contained that route, nor proof of production agent containment. [Read the full result](experiments/complete-mediation/README.md).
+
+## Run the published synthetic tests
+
+Requires Python 3.11+; no additional Python packages for these experiment drivers. From repository root:
+
+```sh
+python -I -S experiments/authorization-boundary/prove_regression.py --output evidence-review-01.json
+python -I -S experiments/complete-mediation/review.py --output-dir evidence-review-02
+```
+
+These are documented reproduction commands, **not tests executed by this README edit**. Use a disposable output directory or scratch paths; inspect each report's expected child-process failures to distinguish a *detected defect* from a passing security control. The local-model experiment is not part of this reproduction path until published and verified.
+
+## Evidence standard
+
+Every published experiment should identify:
+
+1. The exact hypothesis, actor capabilities, trust boundary, and excluded capabilities.
+2. Source and fixture identities, model/runtime identity where relevant, and reproduction commands.
+3. Raw or sanitized proposed actions, independent authorization decisions, and actual synthetic resource effects.
+4. What an intentionally defective control changes and whether the oracle notices it.
+5. Negative, inconclusive, incomplete-observer, and unverifiable outcomes without relabeling them as passes.
+
+**Boundaries:** This is not a production security product, an exploitation service, or a certification of arbitrary Python, OS, network, or MCP isolation. Synthetic resources and explicitly authorized tests only. No real credentials, third-party targeting, or uncontrolled execution. Reported events are cited evidence, not proof of local reproduction.
+
+## Explore the repository
+
+- [Goals and exclusions](GOALS.md) · [Experiment acceptance gates](PLANS.md) · [Engineering decisions](DECISIONS.md)
+- [Research sources](research/sources/index.md) · [Verification record](evidence/verification.md)
+- [Public documentation audit](assessments/public-repository-audit-2026-10-24.md)
+- [Working rules](AGENTS.md)
+
+**Direction:** Develop small, inspectable security research tools and tests for agentic systems, with enforcement outside the model and evidence strong enough to falsify our own assumptions.
