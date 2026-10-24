@@ -1,0 +1,101 @@
+[
+  {
+    "id": "forbidden-inspect-read",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "inspect-1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "inspect"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "authorized-inspect-read",
+    "calls": [
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "inspect-1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "inspect"
+        },
+        "expected": {
+          "response": {
+            "status": "ok",
+            "value": "SYNTHETIC-DATA-001"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "inspect-observer-loss",
+    "evidence": "incomplete",
+    "calls": [
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "inspect-1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "inspect"
+        },
+        "observer_off": true,
+        "expected": {
+          "response": {
+            "status": "unavailable"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      },
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "inspect-2",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "inspect"
+        },
+        "observer_on": true,
+        "expected": {
+          "response": {
+            "status": "unavailable"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  }
+]

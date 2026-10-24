@@ -1,5 +1,21 @@
 # Research 01 plan
 
+## Adversarial Review 02 acceptance gate
+
+Hypothesis: every protected operation reachable through a bound data-only interface receives final-action authorization. Counterexample: an intruder submits a valid read request through a new `inspect` route and receives the exact protected marker without `Resource.perform` authorizing it. Direct Python access to `snapshot()` alone is outside this claim. Only the authorized disposable variant adds this route; do not claim it already existed in Experiment 01.
+
+Scope before execution: original two identities and vault; one alternative read-only entry point in temporary model copies. No original experiment edits, new dependencies, actor Python execution, shell/network access, real targets or host changes. Harness may copy source, run isolated Python children and write synthetic evidence. Stop an episode at its first evidence discrepancy; reset subsequent diagnostics; unexpected real actor I/O or non-synthetic content stops all runs.
+
+Freeze the [three new cases](experiments/complete-mediation/cases.json): unauthorized inspect read expects denial/no events/unchanged state; authorized inspect read expects exact value plus one service event; observer loss/recovery expects frozen dispatch and no security pass. Run the original suite against original and defective copies; run original plus new cases against defect, correction, repair removal and restoration. Require exact counterexample response, no logged dispatch and unchanged snapshot; new regression must fail the defect, corrected authorized work must pass, and missing evidence must be rejected. Three deterministic repetitions per case. GitHub delivery requires inspected branches/PRs, verified remote SHA and a PR to main; merge only if every user-specified safety condition is established.
+
+## Experiment 01 execution gate (subsequent task)
+
+This task replaces the earlier VM/A/B/C execution prerequisites only for the narrower in-process authorization model. The previous design remains historical and unexecuted. Host execution is not evidence of disconnected VM isolation. Scope: two synthetic harness-bound identities, one in-memory resource, direct and single-relay read/write, deterministic final authorization, independent service observer and hand-authored oracle. No actor code execution, host tools, networking, installations, containment or remediation.
+
+Freeze I1 complete final mediation, I2 harness identity integrity, I3 no unauthorized dispatch/disclosure/mutation, I4 exact authorized effects and I5 no pass with absent/inconsistent evidence before execution. The [matrix](experiments/authorization-boundary/cases.json) specifies expected responses, service dispatches and exact final bytes/version without invoking policy code.
+
+Acceptance: correct suite passes; disposable relay-check removal produces independently observed forbidden effects and a nonzero test exit; restored source passes. Three fresh-state repetitions must agree. Observer unavailable blocks dispatch; missing, contradictory or forged evidence must fail the oracle. Stop a scenario at its first discrepancy, preserve its synthetic record, and fail the run; only separately reset scenarios continue for diagnosis. Stop all execution for real I/O by the actor, non-synthetic data or scope expansion. Trusted harness may read source/fixtures and write evidence; its temporary mutation driver may launch only this test runner. [Report and limitations](experiments/authorization-boundary/REPORT.md).
+
 **Window:** disclosures dated 2026-07-01 through 2026-10-23 inclusive. Earlier events may qualify when first disclosed within the window. Later revisions are excluded from cutoff conclusions unless an in-window source independently supports the claim.
 
 | Phase | Acceptance criterion | Status |

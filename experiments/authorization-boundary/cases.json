@@ -1,0 +1,1000 @@
+[
+  {
+    "id": "authorized-direct",
+    "calls": [
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "ok",
+            "value": "SYNTHETIC-DATA-001"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      },
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r2",
+          "operation": "write",
+          "resource": "vault-1",
+          "route": "direct",
+          "value": "SYNTHETIC-WRITE-001"
+        },
+        "expected": {
+          "response": {
+            "status": "ok"
+          },
+          "state": {
+            "value": "SYNTHETIC-WRITE-001",
+            "version": 1
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      },
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r3",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "ok",
+            "value": "SYNTHETIC-WRITE-001"
+          },
+          "state": {
+            "value": "SYNTHETIC-WRITE-001",
+            "version": 1
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "forbidden-direct-read-vault-1",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "forbidden-direct-read-vault-alias",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-alias",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "forbidden-direct-write-vault-1",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "write",
+          "resource": "vault-1",
+          "route": "direct",
+          "value": "SYNTHETIC-WRITE-001"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "forbidden-direct-write-vault-alias",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "write",
+          "resource": "vault-alias",
+          "route": "direct",
+          "value": "SYNTHETIC-WRITE-001"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "authorized-alias-direct",
+    "calls": [
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-alias",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "ok",
+            "value": "SYNTHETIC-DATA-001"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "authorized-relay",
+    "calls": [
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "relay"
+        },
+        "expected": {
+          "response": {
+            "status": "ok",
+            "value": "SYNTHETIC-DATA-001"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      },
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r2",
+          "operation": "write",
+          "resource": "vault-1",
+          "route": "relay",
+          "value": "SYNTHETIC-WRITE-001"
+        },
+        "expected": {
+          "response": {
+            "status": "ok"
+          },
+          "state": {
+            "value": "SYNTHETIC-WRITE-001",
+            "version": 1
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      },
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r3",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "relay"
+        },
+        "expected": {
+          "response": {
+            "status": "ok",
+            "value": "SYNTHETIC-WRITE-001"
+          },
+          "state": {
+            "value": "SYNTHETIC-WRITE-001",
+            "version": 1
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "forbidden-relay-read-vault-1",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "relay"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "forbidden-relay-read-vault-alias",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-alias",
+          "route": "relay"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "forbidden-relay-write-vault-1",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "write",
+          "resource": "vault-1",
+          "route": "relay",
+          "value": "SYNTHETIC-WRITE-001"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "forbidden-relay-write-vault-alias",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "write",
+          "resource": "vault-alias",
+          "route": "relay",
+          "value": "SYNTHETIC-WRITE-001"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "authorized-alias-relay",
+    "calls": [
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-alias",
+          "route": "relay"
+        },
+        "expected": {
+          "response": {
+            "status": "ok",
+            "value": "SYNTHETIC-DATA-001"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "forged-principal",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct",
+          "principal": "operator-1"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "forged-role",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "write",
+          "resource": "vault-1",
+          "route": "relay",
+          "value": "SYNTHETIC-WRITE-001",
+          "role": "admin"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "forged-capability",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "relay",
+          "capability": "operator-1"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "unsupported-op",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "delete",
+          "resource": "vault-1",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "unsupported-route",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "other"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "unknown-resource",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "outside-scope",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "alias-case",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "VAULT-1",
+          "route": "relay"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "missing-id",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "malformed-id",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": 7,
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "malformed-resource",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": [
+            "vault-1"
+          ],
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "malformed-value",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "write",
+          "resource": "vault-1",
+          "route": "direct",
+          "value": 42
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "missing-value",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "write",
+          "resource": "vault-1",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "unexpected-value",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct",
+          "value": "SYNTHETIC-WRITE-001"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "not-an-object",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": null,
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "empty-request",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {},
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "authorized-write-replay",
+    "calls": [
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "write",
+          "resource": "vault-1",
+          "route": "direct",
+          "value": "SYNTHETIC-WRITE-001"
+        },
+        "expected": {
+          "response": {
+            "status": "ok"
+          },
+          "state": {
+            "value": "SYNTHETIC-WRITE-001",
+            "version": 1
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      },
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "write",
+          "resource": "vault-1",
+          "route": "direct",
+          "value": "SYNTHETIC-WRITE-001"
+        },
+        "expected": {
+          "response": {
+            "status": "replay"
+          },
+          "state": {
+            "value": "SYNTHETIC-WRITE-001",
+            "version": 1
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "unauthorized-replay",
+    "calls": [
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "relay"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      },
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "relay"
+        },
+        "expected": {
+          "response": {
+            "status": "replay"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cross-principal-replay",
+    "calls": [
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "ok",
+            "value": "SYNTHETIC-DATA-001"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      },
+      {
+        "principal": "intruder-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "relay"
+        },
+        "expected": {
+          "response": {
+            "status": "denied"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "authorized-validation-recovery",
+    "calls": [
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct",
+          "principal": "intruder-1"
+        },
+        "expected": {
+          "response": {
+            "status": "invalid"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        }
+      },
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "ok",
+            "value": "SYNTHETIC-DATA-001"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": true,
+          "target": "vault-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "observer-loss",
+    "evidence": "incomplete",
+    "calls": [
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "write",
+          "resource": "vault-1",
+          "route": "direct",
+          "value": "SYNTHETIC-WRITE-001"
+        },
+        "expected": {
+          "response": {
+            "status": "unavailable"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        },
+        "observer_off": true
+      },
+      {
+        "principal": "operator-1",
+        "request": {
+          "id": "r1",
+          "operation": "read",
+          "resource": "vault-1",
+          "route": "direct"
+        },
+        "expected": {
+          "response": {
+            "status": "unavailable"
+          },
+          "state": {
+            "value": "SYNTHETIC-DATA-001",
+            "version": 0
+          },
+          "dispatch": false,
+          "target": null
+        },
+        "observer_on": true
+      }
+    ]
+  }
+]
