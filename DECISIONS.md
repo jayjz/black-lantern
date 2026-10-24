@@ -1,5 +1,9 @@
 # Decision record
 
+## Experiment 03 - D09: Treat inference as untrusted proposal generation
+
+Use Python standard-library HTTP to the explicitly authorized loopback Ollama endpoint. Preserve both earlier experiment subtrees. Import the reviewed authorization model; add exact synthetic tool validation, not model-executed tools or policy decisions. Replace the model's stored personality system message with a fixed experimental system message and explicitly override its stored 2048-context/100-token/0.4-temperature defaults for this run; retain both configurations as evidence. Record the model manifest digest before and after inference, plus sanitized Modelfile/template and placement. A model tag is mutable; digest observations are not attestation of server integrity. Local inference extends the trusted computing base to the HTTP adapter and Ollama response parser. Same-process observation and this agent's execution are not independent engineering certification.
+
 ## Review 02 - D08: Treat route coverage separately from oracle independence
 
 Preserve Experiment 01 byte-for-byte. A test-only source builder adds exactly one `inspect` read entry point to disposable copies. Correct default routes it through `Resource.perform`; an explicit mutation replaces that delegation with an unchecked `snapshot()` return. Both variants have the same interface. This tests a new ingress, rather than weakening the already-tested final guard. The original oracle and runner remain unchanged: new static cases test whether their response/state comparisons detect a read absent from their service event stream. A green old matrix cannot establish that all accepted routes were exercised. Same-process instrumentation and this same agent's second pass do not constitute independent human review or Python isolation. [Code audit and limits](experiments/complete-mediation/README.md).
