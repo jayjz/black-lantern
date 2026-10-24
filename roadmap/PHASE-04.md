@@ -59,8 +59,8 @@ The operator must build demonstrable skill in Python code review, authn/authz, H
 
 ## Useful references
 
-- [Experiment 03 report](../experiments/model-tool-authorization/README.md) (available when PR #5 merges)
-- [Experiment 03 hardening](../experiments/model-tool-authorization/HARDENING.md) (available when PR #5 merges)
+- [Experiment 03 report](https://github.com/jayjz/black-lantern/blob/feature/experiment-03-model-tool-authorization/experiments/model-tool-authorization/README.md) (PR #5, pending merge)
+- [Experiment 03 hardening](https://github.com/jayjz/black-lantern/blob/feature/experiment-03-model-tool-authorization/experiments/model-tool-authorization/HARDENING.md) (PR #5, pending merge)
 - [OWASP agentic security guidance](https://genai.owasp.org/)
 - [NIST AI RMF and Generative AI Profile](https://www.nist.gov/itl/ai-risk-management-framework)
 - [Ollama GGUF import](https://docs.ollama.com/import)
