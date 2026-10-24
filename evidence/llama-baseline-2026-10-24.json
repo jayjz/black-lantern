@@ -1,0 +1,167 @@
+﻿{
+    "observed_utc_date":  "2026-10-24",
+    "kind":  "reviewed local observations; not independent attestation",
+    "server_sha256":  "8f535089d8ce1996a2fd784a40a8207fc620122e2b584176b65e77f824c16a13",
+    "model":  {
+                  "gguf_version":  3,
+                  "tensor_count":  292,
+                  "bytes":  4920745984,
+                  "sha256":  "73da18db1557e19e8ec2d6c1e8ef08e182c735d72f3bd526f6940f4fec96c1cb",
+                  "metadata":  {
+                                   "general.architecture":  "llama",
+                                   "general.type":  "model",
+                                   "general.name":  "Unsloth_Gguf_X01U6R2L",
+                                   "general.quantized_by":  "Unsloth",
+                                   "general.size_label":  "8.0B",
+                                   "general.repo_url":  "https://huggingface.co/unsloth",
+                                   "general.tags":  {
+                                                        "array_type":  8,
+                                                        "count":  2
+                                                    },
+                                   "llama.block_count":  32,
+                                   "llama.context_length":  131072,
+                                   "llama.embedding_length":  4096,
+                                   "llama.feed_forward_length":  14336,
+                                   "llama.attention.head_count":  32,
+                                   "llama.attention.head_count_kv":  8,
+                                   "llama.rope.freq_base":  500000.0,
+                                   "llama.attention.layer_norm_rms_epsilon":  9.9999997473787516E-06,
+                                   "llama.attention.key_length":  128,
+                                   "llama.attention.value_length":  128,
+                                   "llama.vocab_size":  128258,
+                                   "llama.rope.dimension_count":  128,
+                                   "tokenizer.ggml.model":  "gpt2",
+                                   "tokenizer.ggml.pre":  "llama-bpe",
+                                   "tokenizer.ggml.tokens":  {
+                                                                 "array_type":  8,
+                                                                 "count":  128258
+                                                             },
+                                   "tokenizer.ggml.token_type":  {
+                                                                     "array_type":  5,
+                                                                     "count":  128258
+                                                                 },
+                                   "tokenizer.ggml.merges":  {
+                                                                 "array_type":  8,
+                                                                 "count":  280147
+                                                             },
+                                   "tokenizer.ggml.bos_token_id":  128000,
+                                   "tokenizer.ggml.eos_token_id":  128256,
+                                   "tokenizer.ggml.padding_token_id":  128001,
+                                   "tokenizer.ggml.add_bos_token":  true,
+                                   "tokenizer.ggml.add_sep_token":  false,
+                                   "tokenizer.chat_template":  "{% if not add_generation_prompt is defined %}{% set add_generation_prompt = false %}{% endif %}{% for message in messages %}{{\u0027\u003c|im_start|\u003e\u0027 + message[\u0027role\u0027] + \u0027\n\u0027 + message[\u0027content\u0027] + \u0027\u003c|im_end|\u003e\u0027 + \u0027\n\u0027}}{% endfor %}{% if add_generation_prompt %}{{ \u0027\u003c|im_start|\u003eassistant\n\u0027 }}{% endif %}",
+                                   "general.quantization_version":  2,
+                                   "general.file_type":  15
+                               }
+              },
+    "baseline":  {
+                     "context_capacity":  4096,
+                     "total_slots":  1,
+                     "model_alias":  "Dolphin3.0-Llama3.1-8B-abliterated.Q4_K_M.gguf",
+                     "build_info":  "b8833-45cac7ca7",
+                     "requests":  [
+                                      {
+                                          "warmup":  true,
+                                          "wall_seconds":  2.375,
+                                          "timings":  {
+                                                          "cache_n":  0,
+                                                          "prompt_n":  1466,
+                                                          "prompt_ms":  891.085,
+                                                          "prompt_per_token_ms":  0.6078342428376535,
+                                                          "prompt_per_second":  1645.1853639102892,
+                                                          "predicted_n":  64,
+                                                          "predicted_ms":  1475.785,
+                                                          "predicted_per_token_ms":  23.059140625,
+                                                          "predicted_per_second":  43.36675057681166
+                                                      },
+                                          "gpu_before":  {
+                                                             "total_mib":  8188,
+                                                             "used_mib":  6211,
+                                                             "free_mib":  1746
+                                                         },
+                                          "gpu_after":  {
+                                                            "total_mib":  8188,
+                                                            "used_mib":  6221,
+                                                            "free_mib":  1736
+                                                        }
+                                      },
+                                      {
+                                          "warmup":  false,
+                                          "wall_seconds":  2.1410000000032596,
+                                          "timings":  {
+                                                          "cache_n":  0,
+                                                          "prompt_n":  1466,
+                                                          "prompt_ms":  657.388,
+                                                          "prompt_per_token_ms":  0.4484229195088677,
+                                                          "prompt_per_second":  2230.0376642104816,
+                                                          "predicted_n":  64,
+                                                          "predicted_ms":  1480.818,
+                                                          "predicted_per_token_ms":  23.13778125,
+                                                          "predicted_per_second":  43.21935578848988
+                                                      },
+                                          "gpu_before":  {
+                                                             "total_mib":  8188,
+                                                             "used_mib":  6221,
+                                                             "free_mib":  1736
+                                                         },
+                                          "gpu_after":  {
+                                                            "total_mib":  8188,
+                                                            "used_mib":  6223,
+                                                            "free_mib":  1734
+                                                        }
+                                      },
+                                      {
+                                          "warmup":  false,
+                                          "wall_seconds":  2.2179999999934807,
+                                          "timings":  {
+                                                          "cache_n":  0,
+                                                          "prompt_n":  1466,
+                                                          "prompt_ms":  672.561,
+                                                          "prompt_per_token_ms":  0.45877285129604367,
+                                                          "prompt_per_second":  2179.727935458642,
+                                                          "predicted_n":  64,
+                                                          "predicted_ms":  1523.61,
+                                                          "predicted_per_token_ms":  23.80640625,
+                                                          "predicted_per_second":  42.00550009516871
+                                                      },
+                                          "gpu_before":  {
+                                                             "total_mib":  8188,
+                                                             "used_mib":  6223,
+                                                             "free_mib":  1734
+                                                         },
+                                          "gpu_after":  {
+                                                            "total_mib":  8188,
+                                                            "used_mib":  6226,
+                                                            "free_mib":  1731
+                                                        }
+                                      },
+                                      {
+                                          "warmup":  false,
+                                          "wall_seconds":  2.1719999999913853,
+                                          "timings":  {
+                                                          "cache_n":  0,
+                                                          "prompt_n":  1466,
+                                                          "prompt_ms":  669.084,
+                                                          "prompt_per_token_ms":  0.45640109140518414,
+                                                          "prompt_per_second":  2191.055233722522,
+                                                          "predicted_n":  64,
+                                                          "predicted_ms":  1504.68,
+                                                          "predicted_per_token_ms":  23.510625,
+                                                          "predicted_per_second":  42.53396070925379
+                                                      },
+                                          "gpu_before":  {
+                                                             "total_mib":  8188,
+                                                             "used_mib":  6226,
+                                                             "free_mib":  1731
+                                                         },
+                                          "gpu_after":  {
+                                                            "total_mib":  8188,
+                                                            "used_mib":  6252,
+                                                            "free_mib":  1705
+                                                        }
+                                      }
+                                  ],
+                     "vram_scope":  "whole GPU before/after; not per-process or continuous peak",
+                     "scope":  "existing server; no loading test or launcher execution"
+                 }
+}

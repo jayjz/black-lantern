@@ -45,7 +45,7 @@ Models may **propose** tool calls. They do not receive authority to execute thos
 | **Adversarial Review 02 — Complete-mediation coverage** | Executed, synthetic counterexample: a new unchecked route escapes the old tests; added regression detects it | [Review and exact evidence](experiments/complete-mediation/README.md) |
 | **Agent intrusion containment** | Design only; proposed comparison of passive messaging, authorization, and independent containment | [Threat model and test plan](experiments/agent-intrusion-containment/README.md) |
 | **Research 01 — Failure mechanisms** | Source review of three public disclosures; not locally exploited or reproduced | [Evidence ledger](research/incidents/01-evidence-ledger.md) |
-| **Experiment 03 — Local-model tool evaluation** | In development locally; **no public real-model evaluation result yet** | Pending verified push and evidence |
+| **Experiment 03 — Local-model tool evaluation** | Published on open PR #5; unmerged at this audit | [Pinned report](https://github.com/jayjz/black-lantern/blob/a3e0dc07a39d39ab4a2c55152bcbebe66a381b23/experiments/model-tool-authorization/README.md) |
 
 ### A concrete finding
 
@@ -84,3 +84,9 @@ Every published experiment should identify:
 - [Working rules](AGENTS.md)
 
 **Direction:** Develop small, inspectable security research tools and tests for agentic systems, with enforcement outside the model and evidence strong enough to falsify our own assumptions.
+
+## Repository and local runtime
+
+[Canonical Phase 04 plan](roadmap/PHASE-04.md) · [Version control policy](docs/VERSION_CONTROL.md) · [Git/PR reconciliation](docs/GIT_AUDIT.md) · [Local llama.cpp audit and launcher](docs/LLAMA_RUNTIME_AUDIT.md).
+
+Phase 04 research remains prospective. The local runtime audit measures bounded synthetic completion throughput without host tools; it does not rerun Experiment 03 or establish a model-security result.
