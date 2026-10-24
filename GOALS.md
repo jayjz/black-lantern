@@ -9,6 +9,10 @@ Research 01 is the initial bounded baseline, not an exhaustive incident census. 
 
 Excluded: startup validation, product development, live exploitation, unsolicited scanning, third-party testing, credential use, deployment, and publication. Implementation of experiment proposals requires a subsequent scoped task.
 
+## Repository governance and reproducible local inference
+
+The 2026-10-24 task authorizes this bounded Git/llama.cpp audit, scripts/documentation and normal GitHub delivery. Preserve all unmerged work and frozen Experiment 03 evidence. Establish one [prospective Phase 04 roadmap](roadmap/PHASE-04.md) and a [version control policy](docs/VERSION_CONTROL.md). Runtime smoke/performance checks do not extend the agent-security experimental scope; acceptance is in [PLANS.md](PLANS.md#version-control-and-local-runtime-audit-acceptance-gate).
+
 ## Agent intrusion containment experiment
 
 Design an isolated, reproducible comparison of a passive defensive message, deterministic authorization, and independent containment/remediation. Challenge the assumption that an unauthorized agent can be made safe by asking it to stop and repair its entry path. Establish observable boundaries without giving the actor host repair authority. [Design package](experiments/agent-intrusion-containment/README.md).

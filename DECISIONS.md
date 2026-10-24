@@ -1,5 +1,11 @@
 # Decision record
 
+## 2026-10-24 - D11: Reconcile plans without merging experiments
+
+Use `roadmap/PHASE-04.md` as the prospective canonical roadmap, reconciling PR #6's compact gates with PR #7's independence levels, provenance limits and explicit demand criteria. Keep the alternate filename as a pointer. Neither source branch is merged, deleted or rewritten. This branch starts at current main, so PR #5 remains a separate dependency, cited by immutable SHA. Additive root entries minimize interference with that PR but require a fresh overlap review before any merge. The [Git audit](docs/GIT_AUDIT.md) records the precise source revisions.
+
+Use the existing 4096 server for bounded performance observations because the user explicitly chose to preserve it. Do not infer free VRAM from llama.cpp's device-list estimate under Windows WDDM; NVIDIA-SMI shows only about 2 GiB free. Skip competing loads and 8192. Pin launcher flags to installed build 8833, explicitly disable automatic fitting and remove inherited llama environment settings so requested context/offload and absent host tools remain reviewable. A preflight is not a loading test. [Runtime record](docs/LLAMA_RUNTIME_AUDIT.md).
+
 ## Review 02 - D08: Treat route coverage separately from oracle independence
 
 Preserve Experiment 01 byte-for-byte. A test-only source builder adds exactly one `inspect` read entry point to disposable copies. Correct default routes it through `Resource.perform`; an explicit mutation replaces that delegation with an unchecked `snapshot()` return. Both variants have the same interface. This tests a new ingress, rather than weakening the already-tested final guard. The original oracle and runner remain unchanged: new static cases test whether their response/state comparisons detect a read absent from their service event stream. A green old matrix cannot establish that all accepted routes were exercised. Same-process instrumentation and this same agent's second pass do not constitute independent human review or Python isolation. [Code audit and limits](experiments/complete-mediation/README.md).

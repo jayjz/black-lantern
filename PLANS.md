@@ -1,5 +1,17 @@
 # Research 01 plan
 
+## Version control and local runtime audit acceptance gate
+
+The 2026-10-24 task authorizes GitHub inspection/delivery, local file identity/metadata inspection and bounded inference at `127.0.0.1:8080` with the specified GGUF and existing llama-server. Scope is launch/performance reproducibility, not Experiment 04. The user elected to keep the existing process running: no competing model load, process replacement or 8192 test. Synthetic prompt only, no tools, no generated text execution, no Experiment 03 capture/fixture/result edits.
+
+Before inference: verify exact model SHA-256, existing process command/listener, 4096 effective context and one slot. Freeze one 64-token warmup plus three 64-token measured completions of the same approximately 1500-token synthetic prompt, temperature 0, seed 1234, no prompt cache; each HTTP request has a 60-second socket timeout and a 2 MiB response cap. Stop on identity/config drift, HTTP failure, wrong token counts, unexpected host effects or evidence discrepancy. No automatic retries. GPU snapshots have 10-second subprocess deadlines. The local HTTP peer remains part of the trusted computing base; these are not hard process-wide deadlines against a malicious trickling peer.
+
+Acceptance: all four responses reconcile their prompt/generated token counts; report raw timings, median/range and whole-GPU memory observations without claiming a continuous peak or full-context occupancy. Launcher must parse, pass identity-only validation and reject missing paths, wrong hashes, unsupported contexts and occupied ports before launch. Loading through the new launcher and 8192 throughput are explicitly skipped under the user constraint. Verify the scoped diff, frozen work preservation, normal push, remote SHA and open PR to current main. [Runtime record](docs/LLAMA_RUNTIME_AUDIT.md), [Git record](docs/GIT_AUDIT.md).
+
+## Phase 04 prospective acceptance gates
+
+Future gates are canonical in [the Phase 04 roadmap](roadmap/PHASE-04.md). They remain planned. The runtime audit above authorizes only its named smoke/performance work and does not satisfy independent reproduction or authorize the proposed security comparison, interviews or pilot.
+
 ## Adversarial Review 02 acceptance gate
 
 Hypothesis: every protected operation reachable through a bound data-only interface receives final-action authorization. Counterexample: an intruder submits a valid read request through a new `inspect` route and receives the exact protected marker without `Resource.perform` authorizing it. Direct Python access to `snapshot()` alone is outside this claim. Only the authorized disposable variant adds this route; do not claim it already existed in Experiment 01.
